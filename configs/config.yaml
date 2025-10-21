@@ -1,0 +1,180 @@
+# UniMatch-Clip Configuration File
+
+# Model Architecture Configuration
+model:
+  # Embedding dimensions
+  input_dims:
+    vision: 512      # ResNet-18 feature dimension
+    nlp: 768        # BERT hidden dimension
+    security: 256   # Security feature dimension
+    medical: 384    # DenseNet-121 feature dimension
+
+  hidden_dim: 512
+  output_dim: 256    # Unified embedding dimension
+  dropout_rate: 0.1
+
+  # Domain-specific settings
+  domains:
+    vision:
+      num_classes: 10
+      adapter_type: "resnet18"
+      difficulty_threshold: 0.7
+    nlp:
+      num_classes: 5
+      adapter_type: "bert"
+      difficulty_threshold: 0.6
+    security:
+      num_classes: 2
+      adapter_type: "mlp"
+      difficulty_threshold: 0.8
+    medical:
+      num_classes: 4
+      adapter_type: "densenet121"
+      difficulty_threshold: 0.75
+
+# Training Configuration
+training:
+  # Basic training parameters
+  batch_size: 64
+  learning_rate: 1e-3
+  epochs: 30
+  weight_decay: 1e-4
+  gradient_clip: 1.0
+
+  # Optimizer settings
+  optimizer: "adamw"
+  scheduler: "cosine"
+  warmup_epochs: 3
+
+  # Loss function weights
+  loss_weights:
+    vision: 0.3
+    nlp: 0.25
+    security: 0.2
+    medical: 0.25
+
+  # Regularization weights
+  beta: 0.1      # Uncertainty loss weight
+  gamma: 0.05    # Prototype diversity loss weight
+  delta: 0.02    # Alignment loss weight
+
+# Cross-Domain Attention Configuration
+attention:
+  num_heads: 4
+  temperature: 0.07
+  fuzzy_softmax: true
+  uncertainty_modulation: true
+
+# Difficulty-Aware Processing
+difficulty_processing:
+  enable: true
+  test_time_augmentation: true
+  num_augmentations: 3
+  multi_scale_features: true
+  ensemble_voting: true
+
+# Data Configuration
+data:
+  # Dataset paths
+  datasets:
+    cifar10:
+      path: "data/cifar10"
+      train_size: 50000
+      test_size: 10000
+    imdb:
+      path: "data/imdb"
+      train_size: 8000
+      test_size: 2000
+    nsl_kdd:
+      path: "data/nsl_kdd"
+      train_size: 6400
+      test_size: 1600
+    chest_xray:
+      path: "data/chest_xray"
+      train_size: 4800
+      test_size: 1200
+
+  # Data preprocessing
+  preprocessing:
+    vision:
+      resize: [224, 224]
+      normalize: true
+      augmentation: true
+    nlp:
+      max_length: 512
+      tokenizer: "bert-base-uncased"
+    security:
+      standardize: true
+      feature_selection: false
+    medical:
+      histogram_equalization: true
+      contrast_normalization: true
+
+# Evaluation Configuration
+evaluation:
+  metrics: ["accuracy", "precision", "recall", "f1"]
+  cross_domain_similarity: true
+  robustness_tests:
+    noise_levels: [0.1, 0.2, 0.3]
+    distribution_shift: true
+    zero_shot_transfer: true
+
+# Logging and Monitoring
+logging:
+  level: "INFO"
+  log_dir: "logs"
+  tensorboard: true
+  wandb:
+    project: "unimatch-clip"
+    entity: "your-team"
+
+# Model Saving and Loading
+checkpoints:
+  save_dir: "checkpoints"
+  save_best: true
+  save_last: true
+  save_interval: 5  # epochs
+
+# Deployment Configuration
+deployment:
+  api:
+    host: "0.0.0.0"
+    port: 8000
+    workers: 4
+
+  compression:
+    quantization: true
+    pruning: false
+    knowledge_distillation: true
+
+  inference:
+    batch_size: 256
+    device: "auto"  # auto-detect GPU/CPU
+
+# Experimental Settings
+experiments:
+  ablation_study:
+    components: ["adapters", "attention", "difficulty"]
+
+  robustness:
+    noise_types: ["gaussian", "uniform", "salt_pepper"]
+
+  baselines:
+    - "resnet18_per_domain"
+    - "shared_backbone"
+    - "clip_like"
+    - "vit_small"
+
+# Hardware Configuration
+hardware:
+  device: "auto"  # auto, cuda, cpu
+  mixed_precision: true
+  compile_model: false  # PyTorch 2.0 compilation
+
+  # Memory optimization
+  gradient_checkpointing: false
+  memory_efficient_attention: true
+
+# Reproducibility
+seed: 42
+deterministic: true
