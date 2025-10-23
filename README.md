@@ -195,19 +195,7 @@ student_model = compressor.distill(teacher_model, student_model)
 pruned_model = compressor.prune(sparsity=0.4)
 ```
 
-## 📄 Citation
 
-If you use this code in your research, please cite:
-
-```bibtex
-@article{unimatch2025,
-  title={Fuzzy Attention-Based Multi-Domain Learning with Difficulty-Aware Processing},
-  author={Your Name and Collaborators},
-  journal={Your Journal},
-  year={2025},
-  doi={your-doi}
-}
-```
 
 ## 🤝 Contributing
 
@@ -236,5 +224,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - Research community for valuable feedback and suggestions
 
 ---
+
 
 **Note**: This framework is designed for research purposes. For production deployment, please ensure proper validation and testing for your specific use case.
