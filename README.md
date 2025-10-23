@@ -1,4 +1,4 @@
-# UniMatch-Clip: Fuzzy Attention-Based Multi-Domain Learning with Difficulty-Aware Processing
+#  Fuzzy Attention-Based Multi-Domain Learning with Difficulty-Aware Processing
 
 [![Python](https://img.shields.io/badge/Python-3.8%2B-blue.svg)](https://www.python.org/)
 [![PyTorch](https://img.shields.io/badge/PyTorch-1.9%2B-red.svg)](https://pytorch.org/)
@@ -213,8 +213,8 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 📧 Contact
 
-- **Authors**: [Your Name](mailto:your.email@domain.com)
-- **Project Link**: [https://github.com/your-username/UniMatch-Clip](https://github.com/your-username/UniMatch-Clip)
+- **Authors**: [Siyuan Li](mailto:siyuanli@mail.com)
+- **Project Link**: [https://github.com/your-username/UniMatch-Clip](https://github.com/mistymissing/Fuzzy Attention Multi-Domain]{Fuzzy Attention-Based Multi-Domain Learning with Difficulty-Aware Processing)
 - **Paper**: [To be added when published]
 
 ## 🙏 Acknowledgments
@@ -227,3 +227,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 
 **Note**: This framework is designed for research purposes. For production deployment, please ensure proper validation and testing for your specific use case.
+
